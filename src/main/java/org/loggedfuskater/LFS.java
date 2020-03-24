@@ -27,9 +27,9 @@ public class LFS {
      */
     public static String obf(String input, int paddingBytes) {
         if (paddingBytes < 0) {
-            paddingBytes = 0;
+            throw new IllegalArgumentException("paddingBytes cannot be negative.");
         } else if (paddingBytes > 8) {
-            paddingBytes = 8;
+            throw new IllegalArgumentException("paddingBytes cannot exceed 8.");
         }
         MessageDigest sha1;
         try {

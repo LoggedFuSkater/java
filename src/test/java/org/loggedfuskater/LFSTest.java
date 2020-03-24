@@ -19,13 +19,11 @@ public class LFSTest {
     private static final TestData[] TEST_DATA = {
         // Empty input
         new TestData ("",0,"AbsentmindedlyMuscularChildhood"),
-        // Test padding, positive and negative cases. Also, same input -> same output regardless of padding size.
-        new TestData ("asdf",-42,"HonestlyErgonomicSloth"),
+        // Test padding, positive cases. Also, same input -> same output regardless of padding size.
         new TestData ("asdf",0,"HonestlyErgonomicSloth"),
         new TestData ("asdf",2,"HonestlyErgonomicSloth5012"),
         new TestData ("asdf",4,"HonestlyErgonomicSloth5012F6C6"),
         new TestData ("asdf",8,"HonestlyErgonomicSloth5012F6C60B27661C"),
-        new TestData ("asdf",200,"HonestlyErgonomicSloth5012F6C60B27661C"),
         // Test a few unique UUID:s
         new TestData ("ac968750-7ca2-4dde-908b-aacbbed2f470",1,"VerticallyInterestingCarF4"),
         new TestData ("3e3278cd-6030-400d-9c0d-ef9be0119853",5,"StillBlueGorillaA2DEC84AEE"),
@@ -40,5 +38,25 @@ public class LFSTest {
         for (TestData testData : TEST_DATA) {
             Assertions.assertEquals(testData.expectedOutput, LFS.obf(testData.input, testData.padding));
         }
+    }
+
+    @Test
+    public void negativePadding() {
+        try {
+            LFS.obf("hello", -42);
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+        Assertions.fail();
+    }
+
+    @Test
+    public void highPadding() {
+        try {
+            LFS.obf("hello", 99);
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+        Assertions.fail();
     }
 }

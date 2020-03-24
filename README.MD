@@ -37,7 +37,7 @@ Then add the dependency to your pom:
 <dependency>
   <groupId>org.loggedfuskater</groupId>
   <artifactId>LoggedFuSkater</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
